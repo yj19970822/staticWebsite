@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/Normalize.css" />
+    <script src="../../css/bootstrap-4.6.1-dist/jquery-1.11.3.js"></script>
+    <script src="../../css/bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.6.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../css/news.css" />
+  </head>
+  <body>
+    <div class="headerLogo">
+      <img src="../../static/top-2.jpg" class="img-fluid" alt="..." />
+      <div class="discription media">
+        <img src="../../static/logo2.png" class="align-self-center mr-3" alt="..." />
+        <div class="media-body logoColor">
+          <h1 class="mt-0 logoColor"><strong>打造地方红色文化新高地</strong></h1>
+          <p class="fontSize21 logoColor"><strong>保护红色资源 · 传承红色文化 · 弘扬革命传统</strong></p>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <ul class="navi">
+        <li><a href="../index.html">网站首页</a></li>
+        <li><a href="../news.html">红色资讯</a></li>
+        <li><a href="../famers.html">红土骄子</a></li>
+        <li><a href="../gsyz.html">高山仰止</a></li>
+        <li><a href="../hsll.html">红色理论</a></li>
+        <li><a href="../history.html">红色历史</a></li>
+        <li class="activity"><a href="../culture.html">红色文化</a></li>
+        <li><a href="../register.html">登录/注册</a></li>
+      </ul>
+    </nav>
+    <main>
+      <div style="width: 1200px">
+        <div class="bread">
+          <span>当前位置：</span>
+          <span><a href="../index.html">网站首页</a></span>
+          <span>></span>
+          <span><a href="../culture.html">红色文化</a></span>
+        </div>
+        <div class="content">
+          <div class="essay">
+            <p class="title"></p>
+            <div class="property">
+              <span>
+                <span>来源：</span>
+                <span class="author"></span>
+              </span>
+              <span>
+                <span>发布时间：</span>
+                <span class="release"></span>
+              </span>
+              <span>
+                <span class="viewCount"></span>
+                <span>次浏览</span>
+              </span>
+            </div>
+            <p class="constract"></p>
+            <div class="writingContent"></div>
+            <div class="handle">
+              <p>
+                <span>上一篇：</span>
+                <a href="" class="prev"></a>
+              </p>
+              <p>
+                <span>下一篇：</span>
+                <a href="" class="next"></a>
+              </p>
+            </div>
+          </div>
+          <div class="nav">
+            <a href=""><span class="firsSpan">红色文化</span></a>
+            <a href="../culture.html?category=红色影视"><span class="ortherSpan">红色影视</span></a>
+            <a href="../culture.html?category=红色文学"><span class="ortherSpan">红色文学</span></a>
+            <img
+              src="../../static/lxfs.jpg"
+              alt=""
+              style="display: block; width: 180px; height: 140px; margin-top: 120px"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">退出登录</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>是否退出？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" onclick="logout()">退出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <link rel="stylesheet" href="../../css/globla/header.css" />
+  <script>
+    const userInfo = JSON.parse(localStorage.getItem("login"))
+
+    if (userInfo.state) {
+      $(".navi li:last-child a").attr({
+        "data-toggle": "modal",
+        "data-target": "#exampleModal",
+      })
+      $(".navi li:last-child a").html(`欢迎&nbsp&nbsp${userInfo.username}`)
+    }
+
+    function logout() {
+      localStorage.setItem(
+        "login",
+        JSON.stringify({
+          state: false,
+          username: "",
+        })
+      )
+      $(".navi li:last-child a").removeAttr("data-toggle", "data-target")
+      location.href = "../index.html"
+    }
+    $(function () {
+      const lis = $(".navi > li")
+      const navi = $(".navi")
+      navi.mouseenter(function () {
+        lis.map((index, item) => {
+          $(item).removeClass("activity")
+        })
+      })
+      navi.mouseleave(function () {
+        $(lis[6]).addClass("activity")
+      })
+    })
+    const lis = $(".essay > ul > li")
+    function removeItem(descript) {
+      $(".essay > ul").empty()
+      lis.map((index, item) => {
+        if ($(item).attr("data-discrip") === descript) {
+          $(".essay > ul").append(item)
+        }
+      })
+      $(".bread span").length === 4
+        ? $(".bread").append(`
+      <span>></span>
+      <span>${descript}</span>
+      `)
+        : $($(".bread span")[5]).text(descript)
+      $(".bread span:nth-of-type(4) > a").attr("href", "./news.html")
+    }
+  </script>
+  <!-- 请求json文件获取文章详情 -->
+  <!-- <script src="../../cultureWriting.json"></script> -->
+  <script>
+    const data = [
+      {
+        categody: "红歌文学",
+        title: "《在希望的田野上》：歌唱祖国的繁荣富强",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "2533",
+        abstract:
+          "2014年5月四平酒店项目成立至今，已到岗10人（项目总经理、装修副总、装修总工、机电经理2人、设计经理、装修经理、行政经理、行政助理、司机），其中正式党员3人，党员比例达30%。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "**个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "",
+          title: "",
+        },
+        next: {
+          href: "./index.html?id=1",
+          title: "《我的中国心》：海外赤子眷恋祖国的深情",
+        },
+      },
+      {
+        categody: "红歌文学",
+        title: "《我的中国心》：海外赤子眷恋祖国的深情",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "2446",
+        abstract:
+          "8月25日－26日，由飞凡商业联盟与万达集团联合举办，主题为“开放、融合、智慧”的2016’飞凡商业博览会暨第十届万达商业年会在北京国家会议中心盛大开幕。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "**个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=0",
+          title: "《在希望的田野上》：歌唱祖国的繁荣富强",
+        },
+        next: {
+          href: "./index.html?id=2",
+          title: "《黎明的河边》—峻青",
+        },
+      },
+      {
+        categody: "红歌文学",
+        title: "《黎明的河边》—峻青",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "3068",
+        abstract:
+          "在集团党委的指导和支持下，2014年酒店管理公司分党委的党建工作本着双强六好的建设目标有条不紊的展开，对于一个成立不到三年的新公司来说，党建工作能够顺利开展，与集团党委的正确领导是分不开的。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "**个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=1",
+          title: "《我的中国心》：海外赤子眷恋祖国的深情",
+        },
+        next: {
+          href: "./index.html?id=3",
+          title: "红色**·电影《苦菜花》",
+        },
+      },
+      {
+        categody: "红色影视",
+        title: "红色**·电影《苦菜花》",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "3068",
+        abstract:
+          "以“开创科学发展新局面、谱写百年万达新篇章”为主题，以“立足岗位作表率，服务群众当先进”为总载体，充分发挥党组织的核心作用和党员的模范带头作用，支部要求党员以完成经营任务、加强组织建设为目标，打造先进",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "**个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=2",
+          title: "《黎明的河边》—峻青",
+        },
+        next: {
+          href: "./index.html?id=4",
+          title: "【胶东烽火】江面上的红色舰队",
+        },
+      },
+      {
+        categody: "红色影视",
+        title: "【胶东烽火】江面上的红色舰队",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "2075",
+        abstract:
+          "在取得突出业绩的同时，商管公司也不忘党建工作发展创新。作为集团党务工作的领导部门，党委工作部，思路清晰、目标明确、措施得力、工作到位，在党委工作部的正确领导和悉心关怀下，商管公司分党委的党建工作也取得",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "**个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=3",
+          title: " 红色**·电影《苦菜花》",
+        },
+        next: {
+          href: "./index.html?id=5",
+          title: "【胶东烽火】虎口夺金",
+        },
+      },
+      {
+        categody: "红色影视",
+        title: "【胶东烽火】虎口夺金",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1864",
+        abstract:
+          "抓好党建工作，是非公企业的重要任务之一。万达集团董事长*健林高度重视党建，告诫全体员工：“没有共产党就没有中国的改革开放，没有改革开放就没有民营企业，更没有万达的今天。”因此，在文化集团成立之初就迅速",
+        content: [
+          "10月16日，由市委组织部主办，市委党校承办的全市2017年青年干部培训班在市委党校开班。来自各县（区）和市直有关单位的50名中青年干部将接受为期15天的系统培训。",
+          "据了解，本次培训紧紧围绕中青年干部能力素质培养的总体要求，以习近平总书记系列重要讲话精神为重点，通过设置党性教育、区情市情教育、能力提升和实践锻炼等教学板块，着力推动参训学员增强政治素质、开阔工作视野、丰富实践认知、改进作风形象。",
+          "为了切实增强培训实效，本次培训在相关教师授课的基础上，将综合运用辅导讲座、情景模拟、讨论交流、拓展训练和观摩考察等方式开展教学，努力实现教学相长、学以致用，切实帮助参训学员在党性修养、素质提升和作风建设等方面取得新成效，更好服务中卫经济社会建设。",
+        ],
+        prev: {
+          href: "./index.html?id=4",
+          title: "【胶东烽火】江面上的红色舰队",
+        },
+        next: {
+          href: "./index.html?id=6",
+          title: "【胶东烽火】隐形的医院",
+        },
+      },
+      {
+        categody: "红色影视",
+        title: "【胶东烽火】隐形的医院",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1991",
+        abstract:
+          "凡事都要有章有法，工作一定要追求**。”在总经理的带领，公司首先从管理机制上进行了一系列的完善工作，制定各类规章制度，力求在根本上提升整体管理效果。各种大小会议和汇报是万达人较熟悉的节奏，**的会议安",
+        content: [
+          "10月16日，由市委组织部主办，市委党校承办的全市2017年青年干部培训班在市委党校开班。来自各县（区）和市直有关单位的50名中青年干部将接受为期15天的系统培训。",
+          "据了解，本次培训紧紧围绕中青年干部能力素质培养的总体要求，以习近平总书记系列重要讲话精神为重点，通过设置党性教育、区情市情教育、能力提升和实践锻炼等教学板块，着力推动参训学员增强政治素质、开阔工作视野、丰富实践认知、改进作风形象。",
+          "为了切实增强培训实效，本次培训在相关教师授课的基础上，将综合运用辅导讲座、情景模拟、讨论交流、拓展训练和观摩考察等方式开展教学，努力实现教学相长、学以致用，切实帮助参训学员在党性修养、素质提升和作风建设等方面取得新成效，更好服务中卫经济社会建设。",
+        ],
+        prev: {
+          href: "./index.html?id=5",
+          title: "【胶东烽火】虎口夺金",
+        },
+        next: {
+          href: "",
+          title: "",
+        },
+      },
+    ]
+  </script>
+  <script type="text/javascript">
+    $(function () {
+      const writingId = location.href.split("?")[1].split("=")[1]
+      if (!writingId) {
+        location.href = "../culture.html"
+      }
+      const writingContent = data[writingId]
+      $(".title").text(writingContent.title)
+      $(".author").text(writingContent.creater)
+      $(".release").text(writingContent.createTime)
+      $(".viewCount").text(writingContent.viewCount)
+      $(".constract").text(writingContent.abstract)
+      $(".writingContent").empty()
+      writingContent.content.map((item, index) => {
+        $(".writingContent").append(`<p>${item}</p>`)
+      })
+      $(".prev").text(writingContent.prev.title)
+      $(".prev").attr("href", writingContent.prev.href)
+      $(".next").text(writingContent.next.title)
+      $(".next").attr("href", writingContent.next.href)
+      $(".bread").append(`
+        <span>></span>
+        <span>
+        <a href="../culture.html?category=${writingContent.categody}">${writingContent.categody}</a>
+        </span>
+        `)
+      $(".bread").append(`
+        <span>></span>
+        <span>
+        <a href="#">${writingContent.title}</a>
+        </span>
+        `)
+    })
+  </script>
+
+  <style>
+    main {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .essayItem > div {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .essayItem img {
+      margin-right: 25px;
+    }
+    .gategorySpan {
+      font-size: 15px;
+      color: #cc0000;
+      margin-right: 5px;
+    }
+
+    .titleSpan {
+      font-size: 15px;
+      color: #434343;
+      font-weight: bold;
+    }
+
+    .dateSpan {
+      display: block;
+      font-size: 12px;
+      color: #929292;
+      margin-top: 10px;
+    }
+    .essay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .essay .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #434343;
+    }
+
+    .property > span {
+      display: inline-block;
+      padding: 0px 20px 15px 20px;
+    }
+
+    .constract {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      padding: 5px 0;
+      color: #868686;
+      font-weight: normal;
+      line-height: 22px;
+      background-color: #f5f5f5;
+      border-radius: 1px solid #e5e5e5;
+    }
+
+    .writingContent p {
+      font-size: 14px;
+      color: #5a5a5a;
+      line-height: 30px;
+      letter-spacing: 2px;
+    }
+
+    .handle {
+      width: 100%;
+      justify-self: left;
+    }
+
+    .handle span {
+      font-size: 14px;
+      color: #595959;
+    }
+
+    .handle a {
+      font-size: 14px;
+      color: #cc0000;
+    }
+
+    .handle a:hover {
+      text-decoration: none;
+      color: #5a5a5a;
+    }
+    /* .pagination {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+    .thisPage {
+      color: #cc0000;
+    }
+
+    .otherPage {
+      display: inline-block;
+      width: 15px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    }
+    .otherPage > a {
+      width: 100%;
+      height: 100%;
+    }
+
+    .nextPage {
+      display: inline-block;
+      width: 50px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    }
+
+    .lastPage {
+      display: inline-block;
+      width: 30px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    } */
+  </style>
+</html>

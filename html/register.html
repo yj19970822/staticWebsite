@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/Normalize.css" />
+    <link rel="stylesheet" href="../css/globla/header.css" />
+    <script src="../css/bootstrap-4.6.1-dist/jquery-1.11.3.js"></script>
+    <script src="../css/bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap-4.6.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/news.css" />
+  </head>
+  <body>
+    <div class="headerLogo">
+      <img src="../static/top-2.jpg" class="img-fluid" alt="..." />
+      <div class="discription media">
+        <img src="../static/logo2.png" class="align-self-center mr-3" alt="..." />
+        <div class="media-body logoColor">
+          <h1 class="mt-0 logoColor"><strong>打造地方红色文化新高地</strong></h1>
+          <p class="fontSize21 logoColor"><strong>保护红色资源 · 传承红色文化 · 弘扬革命传统</strong></p>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <ul class="navi">
+        <li><a href="./index.html">网站首页</a></li>
+        <li><a href="./news.html">红色资讯</a></li>
+        <li><a href="./famers.html">红土骄子</a></li>
+        <li><a href="./gsyz.html">高山仰止</a></li>
+        <li><a href="./hsll.html">红色理论</a></li>
+        <li><a href="./history.html">红色历史</a></li>
+        <li><a href="./culture.html">红色文化</a></li>
+        <li class="activity"><a href="./register.html">登录/注册</a></li>
+      </ul>
+    </nav>
+    <main>
+      <div style="width: 1200px">
+        <div class="bread">
+          <span>当前位置：</span>
+          <span><a href="./index.html">网站首页</a></span>
+          <span>></span>
+          <span><a href="./register.html">登录/注册</a></span>
+        </div>
+        <div class="content">
+          <div class="essay" style="margin: 0">
+            <div class="handle">
+              <a href="./register.html?category=登录" class="select">登录</a>
+              <span></span>
+              <a href="./register.html?category=注册">注册</a>
+            </div>
+            <div class="loginForm">
+              <div class="loginItem">
+                <label for="username">用户账号</label>
+                <input type="text" name="loginUsername" placeholder="请输入用户账号" />
+              </div>
+              <div class="loginItem">
+                <label for="password">用户密码</label>
+                <input type="text" name="loginPassword" placeholder="请输入账户密码" />
+              </div>
+              <div class="registerItem">
+                <button onclick="login()">登录</button>
+              </div>
+            </div>
+            <div class="registerForm">
+              <div class="registerItem">
+                <label for="username">用户名称</label>
+                <input type="text" name="registerUsername" placeholder="请输入用户名称" required />
+              </div>
+              <div class="registerItem">
+                <label for="userAccount">用户账号</label>
+                <input type="text" name="userAccount" placeholder="请输入用户账号" required />
+              </div>
+              <div class="registerItem">
+                <label for="password">用户密码</label>
+                <input type="text" name="registerpassword" placeholder="请输入用户密码" required />
+              </div>
+              <div class="registerItem">
+                <label for="userEmail">用户邮箱</label>
+                <input type="text" name="userEmail" placeholder="请输入用户邮箱" required />
+              </div>
+              <div class="registerItem">
+                <button onclick="register()">注册</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script>
+    console.log(JSON.parse(localStorage.getItem("userAccounts")))
+    const lis = $(".essay > ul > li")
+    function removeItem(descript) {
+      $(".essay > ul").empty()
+      lis.map((index, item) => {
+        if ($(item).attr("data-discrip") === descript) {
+          $(".essay > ul").append(item)
+        }
+      })
+      $(".bread span").length === 4
+        ? $(".bread").append(`
+      <span>></span>
+      <span>
+        <a href="#">${descript}</a>
+        </span>
+      `)
+        : $($(".bread span a")[2]).text(descript)
+      $(".bread span:nth-of-type(4) > a").attr("href", "./news.html")
+    }
+    function removeStyle(list) {
+      list.map((index, item) => {
+        $(item).removeClass("select")
+      })
+    }
+    const heafArray = location.href.split("?")
+    const alsit = $(".handle a")
+    if (heafArray.length > 1) {
+      const category = decodeURI(heafArray[1].split("=")[1])
+      removeItem(category)
+      if (category === "登录") {
+        $(".registerForm").hide()
+        removeStyle(alsit)
+        $(alsit[0]).addClass("select")
+      } else {
+        $(".loginForm").hide()
+        removeStyle(alsit)
+        $(alsit[1]).addClass("select")
+      }
+      // category === "登录" ? $(".registerForm").hide() : $(".loginForm").hide()
+    } else {
+      removeItem("登录")
+      $(".registerForm").hide()
+    }
+
+    function register() {
+      const inputItems = $(".registerForm input")
+      const res = inputItems.map((index, item) => {
+        // if (!item.validity.valid) {
+        //   const response = $(item).attr("placeholder")
+        //   console.log(response)
+        //   item.setCustomValidity(response)
+        // }
+        if ($(item).val() === "") {
+          alert($(item).attr("placeholder"))
+          return false
+        }
+      })
+      if (res.length === 0) {
+        alert("注册成功")
+        if (localStorage.getItem("userAccounts")) {
+          let obj = localStorage.getItem("userAccounts")
+          obj[$("input[name='userAccount']")] = {
+            usernmae: $("input[name='registerUsername']").val(),
+            account: $("input[name='userAccount']").val(),
+            password: $("input[name='registerpassword']").val(),
+            email: $("input[name='userEmail']").val(),
+          }
+          localStorage.setItem("userAccounts", JSON.stringify(obj))
+        } else {
+          let obj = {}
+          obj[$("input[name='userAccount']").val()] = {
+            usernmae: $("input[name='registerUsername']").val(),
+            account: $("input[name='userAccount']").val(),
+            password: $("input[name='registerpassword']").val(),
+            email: $("input[name='userEmail']").val(),
+          }
+          localStorage.setItem("userAccounts", JSON.stringify(obj))
+        }
+      }
+    }
+
+    const userList = JSON.parse(localStorage.getItem("userAccounts"))
+    function login() {
+      const inputItems = $(".loginForm input")
+      const res = inputItems.map((index, item) => {
+        // if (!item.validity.valid) {
+        //   const response = $(item).attr("placeholder")
+        //   console.log(response)
+        //   item.setCustomValidity(response)
+        // }
+        if ($(item).val() === "") {
+          alert($(item).attr("placeholder"))
+          return false
+        }
+      })
+      console.log(userList)
+      if (res.length === 0) {
+        if (userList === null) {
+          alert("账户不存在")
+          return false
+        }
+        if (!userList[$("input[name='loginUsername']").val()]) {
+          alert("账户不存在")
+        } else {
+          if ($("input[name='loginPassword'").val() === userList[$("input[name='loginUsername']").val()].password) {
+            alert("登录成功")
+            localStorage.setItem(
+              "login",
+              JSON.stringify({
+                state: true,
+                username: $("input[name='loginUsername']").val(),
+              })
+            )
+            location.href = "./index.html"
+          } else {
+            alert("密码不正确")
+          }
+        }
+      }
+    }
+
+    $(function () {
+      const lis = $(".navi > li")
+      const navi = $(".navi")
+      navi.mouseenter(function () {
+        lis.map((index, item) => {
+          $(item).removeClass("activity")
+        })
+      })
+      navi.mouseleave(function () {
+        $(lis[7]).addClass("activity")
+      })
+    })
+  </script>
+  <style>
+    main {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .registerForm,
+    .loginForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .handle {
+      padding: 20px 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    .handle span {
+      display: inline-block;
+      height: 25px;
+      margin: 0 20px;
+      border-right: 1px solid #5a5a5a;
+    }
+
+    .handle a {
+      font-size: 20px;
+      font-weight: bold;
+      color: #5a5a5a;
+    }
+
+    .handle a:hover {
+      text-decoration: none;
+    }
+
+    a[class*="select"] {
+      color: #cc0000;
+    }
+
+    .registerItem,
+    .loginItem {
+      padding: 15px 0;
+    }
+
+    label {
+      padding: 0 5px;
+      font-size: 16px;
+      color: #5a5a5a;
+    }
+
+    input {
+      padding: 5px 3px;
+      border: none;
+      border-bottom: 1px solid #cc0000;
+      color: #5a5a5a;
+      font-size: 16px;
+    }
+    input:focus {
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #5a5a5a;
+    }
+
+    button {
+      width: 120px;
+      height: 40px;
+      color: #ffdb60;
+      font-size: 20px;
+      border: none;
+      border-radius: 40px;
+      background-color: #cc0000;
+    }
+  </style>
+</html>

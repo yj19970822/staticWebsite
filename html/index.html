@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/Normalize.css" />
+    <link rel="stylesheet" href="../css/globla/header.css" />
+    <script src="../css/bootstrap-4.6.1-dist/jquery-1.11.3.js"></script>
+    <script src="../css/bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap-4.6.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body onload="showDate();">
+    <div class="headerLogo">
+      <img src="../static/top-2.jpg" class="img-fluid" alt="..." />
+      <div class="discription media">
+        <img src="../static/logo2.png" class="align-self-center mr-3" alt="..." />
+        <div class="media-body logoColor">
+          <h1 class="mt-0 logoColor"><strong>打造地方红色文化新高地</strong></h1>
+          <p class="fontSize21 logoColor"><strong>保护红色资源 · 传承红色文化 · 弘扬革命传统</strong></p>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <ul class="navi">
+        <li class="activity"><a href="#">网站首页</a></li>
+        <li><a href="./news.html">红色资讯</a></li>
+        <li><a href="./famers.html">红土骄子</a></li>
+        <li><a href="./gsyz.html">高山仰止</a></li>
+        <li><a href="./hsll.html">红色理论</a></li>
+        <li><a href="./history.html">红色历史</a></li>
+        <li><a href="./culture.html">红色文化</a></li>
+        <li><a href="./register.html">登录/注册</a></li>
+      </ul>
+    </nav>
+    <main>
+      <!-- 轮播图和日历板块 -->
+      <div class="Block flexRow">
+        <div class="carousel">
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-ride="carousel"
+            data-interval="2000"
+            data-pause="hover"
+          >
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="../static/ba01.jpg" class="d-block w-100" alt="..." />
+              </div>
+              <div class="carousel-item">
+                <img src="../static/ba02.jpg" class="d-block w-100" alt="..." />
+              </div>
+              <div class="carousel-item">
+                <img src="../static/ba03.jpg" class="d-block w-100" alt="..." />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-target="#carouselExampleIndicators"
+              data-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-target="#carouselExampleIndicators"
+              data-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </button>
+          </div>
+        </div>
+        <div class="calendar">
+          <div id="calendar">
+            <div>
+              <button onclick="lastMonth();"><</button>
+              <span id="dqrq"></span>
+              <button onclick="nextMonth();">></button>
+            </div>
+            <div>
+              <div class="everyday">日</div>
+              <div class="everyday">一</div>
+              <div class="everyday">二</div>
+              <div class="everyday">三</div>
+              <div class="everyday">四</div>
+              <div class="everyday">五</div>
+              <div class="everyday">六</div>
+            </div>
+            <div id="day"></div>
+          </div>
+        </div>
+      </div>
+      <!-- 红色历史板块 -->
+      <div class="Block blockBorder">
+        <div class="title clearfix">
+          <p class="mainColor floatLeft"><strong>红色历史</strong></p>
+          <a class="floatRight toBlock" href="./history.html"
+            ><span style="color: #888888; font-size: 12px">查看更多</span></a
+          >
+        </div>
+        <div class="blockContant1">
+          <div class="hsls">
+            <a href="./historydetail/index.html?id=0">
+              <img src="../static/hsls/hsjd(3).jpg" alt="" />
+            </a>
+            <span style="display: inline-block; padding-top: 10px; font-size: 14px">
+              <a href="./historydetail/index.html?id=0" style="color: #5a5a5a"
+                ><strong>辛亥革命前后烟台市的社会状况</strong></a
+              >
+            </span>
+            <span style="display: block; padding-top: 10px; font-size: 12px; color: #929292">2020-6-5</span>
+            <span
+              style="display: inline-block; padding-top: 10px; font-size: 12px; color: #5a5a5a; word-wrap: break-word"
+              >“好风凭借力，送我上青云”。今年以来，中卫市针对“引才难、留才难”的突出</span
+            >
+          </div>
+          <div class="hsls">
+            <a href="./historydetail/index.html?id=1">
+              <img src="../static/hsls/hsjd(4).jpg" alt="" />
+            </a>
+            <span style="display: inline-block; padding-top: 10px; font-size: 14px">
+              <a href="./historydetail/index.html?id=1" style="color: #5a5a5a"
+                ><strong>中共烟台地方组织的创建</strong></a
+              >
+            </span>
+            <span style="display: block; padding-top: 10px; font-size: 12px; color: #929292">2020-6-5</span>
+            <span
+              style="display: inline-block; padding-top: 10px; font-size: 12px; color: #5a5a5a; word-wrap: break-word"
+              >开幕式上，县人大副主任、总工会主席*月琴致开幕词，她指出，非公企业技能人</span
+            >
+          </div>
+          <div class="hsls">
+            <a href="./historydetail/index.html?id=2">
+              <img src="../static/hsls/hsjd(5).jpg" alt="" />
+            </a>
+            <span style="display: inline-block; padding-top: 10px; font-size: 14px">
+              <a href="./historydetail/index.html?id=2" style="color: #5a5a5a"
+                ><strong>海阳84岁老兵*兰斌将许世友所送京胡</strong></a
+              >
+            </span>
+            <span style="display: block; padding-top: 10px; font-size: 12px; color: #929292">2020-6-5</span>
+            <span
+              style="display: inline-block; padding-top: 10px; font-size: 12px; color: #5a5a5a; word-wrap: break-word"
+              >6月30日上午，在海阳市凤城街道建设村，一个特殊的捐赠仪式正在进行。捐赠</span
+            >
+          </div>
+          <div class="hsls">
+            <a href="./historydetail/index.html?id=3">
+              <img src="../static/hsls/hsjd(6).jpg" alt="" />
+            </a>
+            <span style="display: inline-block; padding-top: 10px; font-size: 14px">
+              <a href="./historydetail/index.html?id=3" style="color: #5a5a5a"><strong>抗战英雄许维禄</strong></a>
+            </span>
+            <span style="display: block; padding-top: 10px; font-size: 12px; color: #929292">2020-6-5</span>
+            <span
+              style="display: inline-block; padding-top: 10px; font-size: 12px; color: #5a5a5a; word-wrap: break-word"
+              >中宁县委办公室、中宁县委组织部在县行政中心**会议室举办全县学习贯彻党的</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- 红色骄子板块 -->
+      <div class="Block blockBorder">
+        <div class="title clearfix">
+          <p class="mainColor floatLeft"><strong>红色骄子</strong></p>
+          <a class="floatRight toBlock" href="./famers.html"
+            ><span style="color: #888888; font-size: 12px">查看更多</span></a
+          >
+        </div>
+        <div class="blockContant2">
+          <div class="hsqyj">
+            <a href="./famersDetail/index.html?id=6">
+              <img
+                src="../static/hsqyj/hsrw(1).jpg"
+                alt=""
+                style="max-width: 216px; max-height: 270px; margin-bottom: 10px"
+              />
+              <span><strong style="color: #5a5a5a; font-size: 16px">红色企业家</strong></span>
+            </a>
+          </div>
+          <div class="hsqyj">
+            <a href="./famersDetail/index.html?id=7">
+              <img
+                src="../static/hsqyj/hsrw(2).jpg"
+                alt=""
+                style="max-width: 216px; max-height: 270px; margin-bottom: 10px"
+              />
+              <span><strong style="color: #5a5a5a; font-size: 16px">红色企业家</strong></span>
+            </a>
+          </div>
+          <div class="hsqyj">
+            <a href="./famersDetail/index.html?id=8">
+              <img
+                src="../static/hsqyj/hsrw(3).jpg"
+                alt=""
+                style="max-width: 216px; max-height: 270px; margin-bottom: 10px"
+              />
+              <span><strong style="color: #5a5a5a; font-size: 16px">红色企业家</strong></span>
+            </a>
+          </div>
+          <div class="hsqyj">
+            <a href="./famersDetail/index.html?id=9">
+              <img
+                src="../static/hsqyj/hsrw(4).jpg"
+                alt=""
+                style="max-width: 216px; max-height: 270px; margin-bottom: 10px"
+              />
+              <span><strong style="color: #5a5a5a; font-size: 16px">红色企业家</strong></span>
+            </a>
+          </div>
+          <div class="hsqyj">
+            <a href="./famersDetail/index.html?id=10">
+              <img
+                src="../static/hsqyj/hsrw(5).jpg"
+                alt=""
+                style="max-width: 216px; max-height: 270px; margin-bottom: 10px"
+              />
+              <span><strong style="color: #5a5a5a; font-size: 16px">红色企业家</strong></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- 高山仰止&红色理论 -->
+      <div class="Block clearfix">
+        <!-- 高山仰止 -->
+        <div class="gsyz floatLeft">
+          <div class="title clearfix" style="border-top: none; padding: 0">
+            <p class="mainColor floatLeft" style="display: inline-block; border-bottom: 2px solid #cc0000">
+              <strong>高山仰止</strong>
+            </p>
+            <a class="floatRight toBlock" href="./gsyz.html"
+              ><span style="color: #888888; font-size: 12px">查看更多</span></a
+            >
+          </div>
+          <div class="gsyzContant">
+            <div class="mediaConttant">
+              <a href="./gsyzDetai/index.html?id=0">
+                <img src="../static/gsyz/hsjd(1).jpg" alt="" style="max-width: 130px; max-height: 90px" />
+              </a>
+              <div>
+                <a href="./gsyzDetai/index.html?id=0"
+                  ><span class="titleSpan">从“风云人物”到无期囚徒——七大关键词解读范宪沉沦之路</span></a
+                >
+                <p class="contantP">
+                  当前，我国医药卫生事业面临人口老龄化、城镇化和慢性病高发等诸多挑战，以医院和疾病为中心的医【详细】
+                </p>
+              </div>
+            </div>
+            <ul style="padding-left: 20px; padding-right: 12px">
+              <li class="clearfix">
+                <a href="./gsyzDetai/index.html?id=1" class="floatLeft titleSpan"
+                  ><span>忏悔录|重庆彭水旅游局局长:对小恩小惠逐渐放松警惕</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./gsyzDetai/index.html?id=2" class="floatLeft titleSpan"
+                  ><span>警惕群众身边的腐败——四起基层严重违纪违法典型案件透视</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./gsyzDetai/index.html?id=3" class="floatLeft titleSpan"
+                  ><span>他缘何从**跌入谷底——天津市地下铁道总公司原总经理高怀</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./gsyzDetai/index.html?id=4" class="floatLeft titleSpan"
+                  ><span>领导干部应具备五个基本功</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./gsyzDetai/index.html?id=5" class="floatLeft titleSpan"
+                  ><span>一席谈：非公有制企业防治腐败工作的探索</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./gsyzDetai/index.html?id=6" class="floatLeft titleSpan"><span>中华人民共和国刑法</span></a>
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 红色理论 -->
+        <div class="gsyz floatRight">
+          <div class="title clearfix" style="border-top: none; padding: 0">
+            <p class="mainColor floatLeft" style="display: inline-block; border-bottom: 2px solid #cc0000">
+              <strong>红色理论</strong>
+            </p>
+            <a class="floatRight toBlock" href="./hsll.html"
+              ><span style="color: #888888; font-size: 12px">查看更多</span></a
+            >
+          </div>
+          <div class="gsyzContant">
+            <div class="mediaConttant">
+              <a href="./hsllDetail/index.html?id=0">
+                <img src="../static/gsyz/hsjd(1).jpg" alt="" style="max-width: 130px; max-height: 90px" />
+              </a>
+              <div>
+                <a href="./hsllDetail/index.html?id=0" class="titleSpan"
+                  ><span>李洪峰：党的十九大较重大的理论成就</span></a
+                >
+                <p class="contantP">
+                  我们党是高举马克思主义伟大旗帜、理论上**成熟并且不断发展的伟大政党。党的全国代表大会作为【详细】
+                </p>
+              </div>
+            </div>
+            <ul style="padding-left: 20px; padding-right: 12px">
+              <li class="clearfix">
+                <a href="./hsllDetail/index.html?id=1" class="floatLeft titleSpan"
+                  ><span>张明仓：新时代中国共产党理论创新的基本经验</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./hsllDetail/index.html?id=2" class="floatLeft titleSpan"
+                  ><span>刘志丹缘何坚持让大家称自己“老刘”</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./hsllDetail/index.html?id=3" class="floatLeft titleSpan"
+                  ><span>向陈云学习调研工作的方法</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./hsllDetail/index.html?id=4" class="floatLeft titleSpan"
+                  ><span>辛亥革命前后烟台市的社会状况</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./hsllDetail/index.html?id=5" class="floatLeft titleSpan"
+                  ><span>中共烟台地方组织的创建</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+              <li class="clearfix">
+                <a href="./hsllDetail/index.html?id=6" class="floatLeft titleSpan"
+                  ><span>倪明胜：夺取新时代中国特色社会主义伟大胜利</span></a
+                >
+                <span class="floatRight datespan">2022-6-5</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- 红色文化 -->
+      <div class="Block blockBorder">
+        <div class="title clearfix">
+          <p class="mainColor floatLeft"><strong>红色文化</strong></p>
+          <a class="floatRight toBlock" href="#"><span style="color: #888888; font-size: 12px">查看更多</span></a>
+        </div>
+        <div class="cultrueBlock">
+          <div class="blockContant3">
+            <div class="mediaConttant">
+              <div class="peature">
+                <a href="./cultureDetail/index.html?id=3">
+                  <img src="../static/hswh/hs(4).jpg" alt="" style="max-width: 192px; max-height: 120px" />
+                </a>
+              </div>
+              <div style="max-width: 350px">
+                <div style="margin-bottom: 5px">
+                  <a href="./culture.html?category=红色影视"><span class="titleSpan">[红色影视]</span></a>
+                  <a href="./cultureDetail/index.html?id=3"><span class="titleSpan">红色文化·电影《苦菜花》</span></a>
+                </div>
+                <p class="contantP">2022-6-5</p>
+                <p class="contantP">
+                  以“开创科学发展新局面、谱写百年万达新篇章”为主题，以“立足岗位作表率，服务群众当先进”为总
+                </p>
+              </div>
+            </div>
+            <div class="mediaConttant">
+              <div class="peature">
+                <a href="./cultureDetail/index.html?id=0">
+                  <img src="../static/hswh/hs(6).jpg" alt="" style="max-width: 192px; max-height: 120px" />
+                </a>
+              </div>
+              <div style="max-width: 350px">
+                <div style="margin-bottom: 5px">
+                  <a href="./culture.html?category=红歌文学"><span class="titleSpan">[红歌文学]</span></a>
+                  <a href="./cultureDetail/index.html?id=0"
+                    ><span class="titleSpan">《在希望的田野上》：歌唱祖国的繁荣富</span></a
+                  >
+                </div>
+                <p class="contantP">2022-6-5</p>
+                <p class="contantP">
+                  2014年5月四平酒店项目成立至今，已到岗10人（项目总经理、装修副总、装修总工、机电经理
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="blockContant3">
+            <div class="mediaConttant">
+              <div class="peature">
+                <a href="./cultureDetail/index.html?id=4">
+                  <img src="../static/hswh/hs(11).jpg" alt="" style="max-width: 192px; max-height: 120px" />
+                </a>
+              </div>
+              <div style="max-width: 350px">
+                <div style="margin-bottom: 5px">
+                  <a href="./culture.html?category=红色影视"><span class="titleSpan">[红色影视]</span></a>
+                  <a href="./cultureDetail/index.html?id=4"
+                    ><span class="titleSpan">【胶东烽火】江面上的红色舰队</span></a
+                  >
+                </div>
+                <p class="contantP">2022-6-5</p>
+                <p class="contantP">
+                  在取得突出业绩的同时，商管公司也不忘党建工作发展创新。作为集团党务工作的领导部门，党委工作部
+                </p>
+              </div>
+            </div>
+            <div class="mediaConttant">
+              <div class="peature">
+                <a href="./cultureDetail/index.html?id=1">
+                  <img src="../static/hswh/hs(5).jpg" alt="" style="max-width: 192px; max-height: 120px" />
+                </a>
+              </div>
+              <div style="max-width: 350px">
+                <div style="margin-bottom: 5px">
+                  <a href="./culture.html?category=红歌文学"><span class="titleSpan">[红歌文学]</span></a>
+                  <a href="./cultureDetail/index.html?id=1"
+                    ><span class="titleSpan">《我的中国心》：海外赤子眷恋祖国的深</span></a
+                  >
+                </div>
+                <p class="contantP">2022-6-5</p>
+                <p class="contantP">8月25日－26日，由飞凡商业联盟与万达集团联合举办，主题为“开放、融合、智慧”的2016’</p>
+              </div>
+            </div>
+          </div>
+          <div class="blockContant3">
+            <div class="mediaConttant">
+              <div class="peature">
+                <a href="./cultureDetail/index.html?id=5">
+                  <img src="../static/hswh/hs(10).jpg" alt="" style="max-width: 192px; max-height: 120px" />
+                </a>
+              </div>
+              <div style="max-width: 350px">
+                <div style="margin-bottom: 5px">
+                  <a href="./culture.html?category=红色影视"><span class="titleSpan">[红色影视]</span></a>
+                  <a href="./cultureDetail/index.html?id=5"><span class="titleSpan">【胶东烽火】虎口夺金</span></a>
+                </div>
+                <p class="contantP">2022-6-5</p>
+                <p class="contantP">
+                  抓好党建工作，是非公企业的重要任务之一。万达集团董事长*健林高度重视党建，告诫全体员工：“没
+                </p>
+              </div>
+            </div>
+            <div class="mediaConttant">
+              <div class="peature">
+                <a href="./cultureDetail/index.html?id=2">
+                  <img src="../static/hswh/hs(1).jpg" alt="" style="max-width: 192px; max-height: 120px" />
+                </a>
+              </div>
+              <div style="max-width: 350px">
+                <div style="margin-bottom: 5px">
+                  <a href="./culture.html?category=红歌文学"><span class="titleSpan">[红歌文学]</span></a>
+                  <a href="./cultureDetail/index.html?id=2"><span class="titleSpan">《黎明的河边》—峻青</span></a>
+                </div>
+                <p class="contantP">2022-6-5</p>
+                <p class="contantP">
+                  在集团党委的指导和支持下，2014年酒店管理公司分党委的党建工作本着双强六好的建设目标有条不
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 红色景点 -->
+      <div class="Block blockBorder" style="position: relative">
+        <div class="title clearfix">
+          <p class="mainColor floatLeft"><strong>红色景点</strong></p>
+          <a class="floatRight toBlock" href="./famers.html"
+            ><span style="color: #888888; font-size: 12px">查看更多</span></a
+          >
+        </div>
+        <div class="carouselBox" style="padding: 0 20px 15px 20px; width: 100%; overflow: hidden">
+          <ul class="jqCarousel" style="width: 3140px; display: flex; flex-direction: row; padding-right: 20px">
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=0"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(8).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-北京</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=1"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(2).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-西柏坡</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=2"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(3).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-延安窑洞</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=3"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(9).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-延安</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=4"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(10).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-太行山</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=0"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(8).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-北京</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=1"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(2).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-西柏坡</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=2"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(3).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-延安窑洞</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=3"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(9).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-延安</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div style="padding: 0 13px">
+                <a
+                  href="./famersDetail/index.html?id=4"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
+                  <img src="../static/hsjd/hs(10).jpg" alt="" style="max-width: 288px; max-height: 180px" />
+                  <span style="font-size: 16px; color: #000000; margin-top: 5px">红色景点-太行山</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">退出登录</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>是否退出？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" onclick="logout()">退出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- 导航样式 -->
+  <script>
+    const userInfo = JSON.parse(localStorage.getItem("login"))
+
+    if (userInfo.state) {
+      $(".navi li:last-child a").attr({
+        "data-toggle": "modal",
+        "data-target": "#exampleModal",
+      })
+      $(".navi li:last-child a").html(`欢迎&nbsp&nbsp${userInfo.username}`)
+    }
+
+    function logout() {
+      localStorage.setItem(
+        "login",
+        JSON.stringify({
+          state: false,
+          username: "",
+        })
+      )
+      $(".navi li:last-child a").removeAttr("data-toggle", "data-target")
+      location.href = "./index.html"
+    }
+    $(function () {
+      const lis = $(".navi > li")
+      const navi = $(".navi")
+      navi.mouseenter(function () {
+        lis.map((index, item) => {
+          $(item).removeClass("activity")
+        })
+      })
+      navi.mouseleave(function () {
+        $(lis[0]).addClass("activity")
+      })
+    })
+  </script>
+  <!-- 日历脚本 -->
+  <script>
+    var today = new Date()
+    var year = today.getFullYear() //获得年份
+    var month = today.getMonth() + 1 //获得月份，getMonth是从0-11的
+    var day = today.getDate() //获得当前日
+    var days = 0
+    //先判断每个月应该有的天数
+    function count() {
+      if (month != 2) {
+        if (month == 4 || month == 6 || month == 9 || month == 11) {
+          days = 30
+        } else {
+          days = 31
+        }
+      } else {
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+          days = 29
+        } else {
+          days = 28
+        }
+      }
+    }
+    //输出当前日期
+    function showMonth() {
+      var year_month = year + "年" + month + "月" + day + "日"
+      document.getElementById("dqrq").innerHTML = year_month
+    }
+
+    function showDate() {
+      showMonth()
+      count()
+      var firstdate = new Date(year, month - 1, 1)
+      var xq = firstdate.getDay()
+      var daterow = document.getElementById("day")
+      daterow.innerHTML = ""
+      if (xq != 0) {
+        for (var i = 0; i < xq; i++) {
+          var dayElement = document.createElement("div")
+          dayElement.className = "everyday"
+          daterow.appendChild(dayElement)
+        }
+      }
+      for (var j = 1; j <= days; j++) {
+        var dayElement = document.createElement("div")
+        dayElement.className = "everyday"
+        dayElement.innerHTML = j + ""
+        if (j == day) {
+          dayElement.style.color = "red"
+        }
+        daterow.appendChild(dayElement)
+      }
+    }
+    //上个月
+    function lastMonth() {
+      if (month > 1) {
+        month = month - 1
+      } else {
+        month = 12
+        year = year - 1
+      }
+      showDate()
+    }
+    //下个月
+    function nextMonth() {
+      if (month < 12) {
+        month = month + 1
+      } else {
+        month = 1
+        year = year + 1
+      }
+      showDate()
+    }
+  </script>
+  <!-- 日历 -->
+  <style>
+    .flexRow {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+    }
+
+    .carouselBox:hover .jqCarousel {
+      animation-play-state: paused;
+    }
+    .jqCarousel {
+      position: relative;
+      animation: move 120s linear infinite;
+    }
+    @keyframes move {
+      to {
+        transform: translate(-1570px);
+      }
+    }
+    /* @keyframes move {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        } */
+
+    /* 日历样式 */
+    #calendar div {
+      text-align: center;
+      /* margin-top: 10px; */
+      margin-bottom: 10px;
+    }
+    #calendar {
+      border-bottom: 1px black solid;
+      width: 400px;
+      margin: auto;
+    }
+    #calendar button {
+      border: none;
+      background-color: white;
+      width: 20px;
+      height: 20px;
+    }
+    #month {
+      width: 320px;
+      float: left;
+      height: 40px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .everyday {
+      width: 56px;
+      float: left;
+    }
+  </style>
+</html>

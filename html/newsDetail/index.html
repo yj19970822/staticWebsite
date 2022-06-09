@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/Normalize.css" />
+    <script src="../../css/bootstrap-4.6.1-dist/jquery-1.11.3.js"></script>
+    <script src="../../css/bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.6.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../css/news.css" />
+  </head>
+  <body>
+    <div class="headerLogo">
+      <img src="../../static/top-2.jpg" class="img-fluid" alt="..." />
+      <div class="discription media">
+        <img src="../../static/logo2.png" class="align-self-center mr-3" alt="..." />
+        <div class="media-body logoColor">
+          <h1 class="mt-0 logoColor"><strong>打造地方红色文化新高地</strong></h1>
+          <p class="fontSize21 logoColor"><strong>保护红色资源 · 传承红色文化 · 弘扬革命传统</strong></p>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <ul class="navi">
+        <li><a href="../index.html">网站首页</a></li>
+        <li class="activity"><a href="../news.html">红色资讯</a></li>
+        <li><a href="../famers.html">红土骄子</a></li>
+        <li><a href="../gsyz.html">高山仰止</a></li>
+        <li><a href="../hsll.html">红色理论</a></li>
+        <li><a href="../history.html">红色历史</a></li>
+        <li><a href="../culture.html">红色文化</a></li>
+        <li><a href="../register.html">登录/注册</a></li>
+      </ul>
+    </nav>
+    <main>
+      <div style="width: 1200px">
+        <div class="bread">
+          <span>当前位置：</span>
+          <span><a href="../index.html">网站首页</a></span>
+          <span>></span>
+          <span><a href="../news.html">红色资讯</a></span>
+        </div>
+        <div class="content">
+          <div class="essay">
+            <p class="title"></p>
+            <div class="property">
+              <span>
+                <span>来源：</span>
+                <span class="author"></span>
+              </span>
+              <span>
+                <span>发布时间：</span>
+                <span class="release"></span>
+              </span>
+              <span>
+                <span class="viewCount"></span>
+                <span>次浏览</span>
+              </span>
+            </div>
+            <p class="constract"></p>
+            <div class="writingContent"></div>
+            <div class="handle">
+              <p>
+                <span>上一篇：</span>
+                <a href="" class="prev"></a>
+              </p>
+              <p>
+                <span>下一篇：</span>
+                <a href="" class="next"></a>
+              </p>
+            </div>
+          </div>
+          <div class="nav">
+            <a href=""><span class="firsSpan">红色资讯</span></a>
+            <a href="../news.html?category=党史今天"><span class="ortherSpan">党史今天</span></a>
+            <a href="../news.html?category=红色动态"><span class="ortherSpan">红色动态</span></a>
+            <a href="../news.html?category=红色图文"><span class="ortherSpan">红色图文</span></a>
+            <img
+              src="../../static/lxfs.jpg"
+              alt=""
+              style="display: block; width: 180px; height: 140px; margin-top: 10px"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">退出登录</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>是否退出？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" onclick="logout()">退出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <link rel="stylesheet" href="../../css/globla/header.css" />
+  <script>
+    const userInfo = JSON.parse(localStorage.getItem("login"))
+
+    if (userInfo.state) {
+      $(".navi li:last-child a").attr({
+        "data-toggle": "modal",
+        "data-target": "#exampleModal",
+      })
+      $(".navi li:last-child a").html(`欢迎&nbsp&nbsp${userInfo.username}`)
+    }
+
+    function logout() {
+      localStorage.setItem(
+        "login",
+        JSON.stringify({
+          state: false,
+          username: "",
+        })
+      )
+      $(".navi li:last-child a").removeAttr("data-toggle", "data-target")
+      location.href = "../index.html"
+    }
+    $(function () {
+      const lis = $(".navi > li")
+      const navi = $(".navi")
+      navi.mouseenter(function () {
+        lis.map((index, item) => {
+          $(item).removeClass("activity")
+        })
+      })
+      navi.mouseleave(function () {
+        $(lis[1]).addClass("activity")
+      })
+    })
+    const lis = $(".essay > ul > li")
+    function removeItem(descript) {
+      $(".essay > ul").empty()
+      lis.map((index, item) => {
+        if ($(item).attr("data-discrip") === descript) {
+          $(".essay > ul").append(item)
+        }
+      })
+      $(".bread span").length === 4
+        ? $(".bread").append(`
+      <span>></span>
+      <span>${descript}</span>
+      `)
+        : $($(".bread span")[5]).text(descript)
+      $(".bread span:nth-of-type(4) > a").attr("href", "./news.html")
+    }
+  </script>
+  <!-- 请求json文件获取文章详情 -->
+  <!-- <script src="../../newsContent.json"></script> -->
+  <script>
+    const data = [
+      {
+        categody: "红色动态",
+        title: "高擎习近平新时代中国特色社会主义思想伟大旗帜",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "2727 ",
+        abstract:
+          "党的十九大把习近平新时代中国特色社会主义思想写入党章，成为**中华民族坚定前行的思想火炬，在实现中华民族伟大复兴中国梦的进程中发挥**作用",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "",
+          title: "",
+        },
+        next: {
+          href: "./index.html?id=1",
+          title: "2005年2月4日 西部大开发五周年座谈会在北京举行",
+        },
+      },
+      {
+        categody: "党史今天",
+        title: "2005年2月4日 西部大开发五周年座谈会在北京举行",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "2351",
+        abstract:
+          "为认真贯彻落实市委关于“利用新媒体加大舆论引导力度”的指示精神，充分利用互联网等新媒体，加大社区卫生系统信息发布力度，本着更好地服务于社区居民和社区卫生工作者的办网宗旨，北京市社区卫生服务管理中心经过近4个月的紧张筹备",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=0",
+          title: "高擎习近平新时代中国特色社会主义思想伟大旗帜",
+        },
+        next: {
+          href: "./index.html?id=2",
+          title: "1975年2月4日 刘家峡水电站建成发电",
+        },
+      },
+      {
+        categody: "党史今天",
+        title: "1975年2月4日 刘家峡水电站建成发电",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1741",
+        abstract:
+          "北京社区卫生服务网自2012年2月16日开通试运行以来，得到了首都居民和社区卫生工作者的极大关注和支持，来自基层的一篇篇新鲜出炉的信息与报道如雨后春笋般涌现，大放异彩；来自居民朋友们的一条条中肯的意见与建议似涓涓细流、温暖人心，让我们倍受鼓舞。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=1",
+          title: "2005年2月4日 西部大开发五周年座谈会在北京举行",
+        },
+        next: {
+          href: "./index.html?id=3",
+          title: "1923年2月4日 京汉铁路工人大罢工",
+        },
+      },
+      {
+        categody: "党史今天",
+        title: "1923年2月4日 京汉铁路工人大罢工",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "2238",
+        abstract:
+          "2007年，北京市在全国率先开展了'慢性病防治家庭保健员培养'工作（以下简称“家庭保健员”），此工作被北京市政府列为政府实事工作加以推进。各区县深入落实，结合实际情况，持续开展家庭保健员培养工作。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=2",
+          title: "1975年2月4日 刘家峡水电站建成发电",
+        },
+        next: {
+          href: "./index.html?id=4",
+          title: "习近平等领导同志亲切会见出席党的十九大代表、特邀代表和列席人员",
+        },
+      },
+      {
+        categody: "红色动态",
+        title: "习近平等领导同志亲切会见出席党的十九大代表、特邀代表和列席人员",
+        creater: "佚名",
+        createTime: "2017-09-01",
+        viewCount: "1726",
+        abstract:
+          "新华社北京10月25日电 中共中央总书记、国家主席、中央军委主席习近平25日下午在人民大会堂亲切会见了出席党的十九大代表、特邀代表和列席人员，并同大家合影留念。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=3",
+          title: "1923年2月4日 京汉铁路工人大罢工",
+        },
+        next: {
+          href: "./index.html?id=5",
+          title: "市场监督管理局坚持“四个结合” 扎实推进“两学一做”学习教育常态化制度化",
+        },
+      },
+      {
+        categody: "红色动态",
+        title: "市场监督管理局坚持“四个结合” 扎实推进“两学一做”学习教育常态化制度化",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1713",
+        abstract:
+          "自“两学一做”学习教育开展以来，中卫市市场监管局结合市场监督管理工作实际，多措并举，认真贯彻落实“党要管党、从严治党”方针，有力有序地把“两学一做”学习教育组织好、实施好，确保学习教育抓到位、见实效。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=4",
+          title: "习近平等领导同志亲切会见出席党的十九大代表、特邀代表和列席人员",
+        },
+        next: {
+          href: "./index.html?id=6",
+          title: "中国共产党第十九次全国代表大会在京闭幕 习近平发表重要讲话",
+        },
+      },
+      {
+        categody: "红色动态",
+        title: "中国共产党第十九次全国代表大会在京闭幕 习近平发表重要讲话",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1527",
+        abstract:
+          "中国共产党第十九次全国代表大会在选举产生新一届中央委员会和中央纪律检查委员会，通过关于十八届中央委员会报告的决议、关于十八届中央纪律检查委员会工作报告的决议、关于《中国共产党章程（修正案）》的决议后，24日上午在人民大会堂胜利闭幕。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=5",
+          title: "市场监督管理局坚持“四个结合” 扎实推进“两学一做”学习教育常态化制度化",
+        },
+        next: {
+          href: "./index.html?id=7",
+          title: "十九届中央政治局常委同中外记者见面",
+        },
+      },
+      {
+        categody: "红色图文",
+        title: "十九届中央政治局常委同中外记者见面",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1561",
+        abstract:
+          "统一工作，凝聚共识，增强做好精神卫生工作的使命感和责任感。精神疾病发病呈上升态势，精神卫生工作存在的主要问题，认清形势，坚定信心，准确把握精神卫生事业发展面临的形势和机遇，精神卫生机构是提供精神卫生服务的龙头",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=6",
+          title: "中国共产党第十九次全国代表大会在京闭幕 习近平发表重要讲话",
+        },
+        next: {
+          href: "./index.html?id=8",
+          title: "中国共产党第十九次全国代表大会闭幕会开始",
+        },
+      },
+      {
+        categody: "红色图文",
+        title: "中国共产党第十九次全国代表大会闭幕会开始",
+        creater: "佚名",
+        createTime: "2017-09-01",
+        viewCount: "1561",
+        abstract:
+          "2015年12月31日下午2:30分，运城经济开发区文教卫生局书记毕本安、公共卫生服务科科长薛峰、新农合中心主任李辉、姚伟一行四人前来我中心就基本公共卫生服务项目涉农资金情况进行了专项检查。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=7",
+          title: "十九届中央政治局常委同中外记者见面",
+        },
+        next: {
+          href: "./index.html?id=9",
+          title: "党的十九大主席团举行**次会议 习近平主持会议",
+        },
+      },
+      {
+        categody: "红色图文",
+        title: "党的十九大主席团举行**次会议 习近平主持会议",
+        creater: "佚名",
+        createTime: "2017-09-01",
+        viewCount: "1693",
+        abstract:
+          "运城经济开发区社区卫生服务中心全体工作人员祝贺开发区社区办壕头村卫生所2016年1月10日正式挂牌，着实解决辖区居民看病不方便的问题，为壕头村村民送来健康和祝福。",
+        content: [
+          "中国共产党是高度重视理论建设和富于理论创造精神的政党。回应时代呼唤，反映实践诉求，及时构建科学的理论体系，谱写伟大思想的新篇章是中国共产党和中国社会从胜利走向胜利，从辉煌走向辉煌的不二法门。习近平新时代中国特色社会主义思想就是在伟大时代、伟大实践中创立的伟大思想。今天，习近平新时代中国特色社会主义思想是马克思主义中国化在新长征、新赶考、新起点上的较新成果。这一成果有两大突出标志。",
+          "    **个标志是不丢“老祖宗”注重说“新话”，在坚定不移坚持马克思主义基础上，又不断发展和创新马克思主义。",
+          "    不仅善于全面准确地掌握马克思主义立场、观点和方法，更能自觉运用马克思主义立场、观点和方法分析解决现实问题，通过对历史经验进行深刻总结，对历史规律进行深刻揭示，对现实问题进行深入分析，对未来发展进行深入思考，闪耀着辩证唯物主义和历史唯物主义的光芒。",
+          "    进入新世纪以来，在时代步伐越来越强劲、越来越迅捷的脉动中，中国社会也站在了新的历史方位上。习近平同志指出：“要跟上时代前进步伐，就不能身体已进入21世纪，而脑袋还停留在旧时代。”这番话本来是讲国际关系的，但用在马克思主义中国化上同样一语中的。",
+        ],
+        prev: {
+          href: "./index.html?id=8",
+          title: "中国共产党第十九次全国代表大会闭幕会开始",
+        },
+        next: {
+          href: "",
+          title: "",
+        },
+      },
+    ]
+  </script>
+  <script type="text/javascript">
+    $(function () {
+      const writingId = location.href.split("?")[1].split("=")[1]
+      if (!writingId) {
+        location.href = "../news.html.html"
+      }
+      const writingContent = data[writingId]
+      $(".title").text(writingContent.title)
+      $(".author").text(writingContent.creater)
+      $(".release").text(writingContent.createTime)
+      $(".viewCount").text(writingContent.viewCount)
+      $(".constract").text(writingContent.abstract)
+      $(".writingContent").empty()
+      writingContent.content.map((item, index) => {
+        $(".writingContent").append(`<p>${item}</p>`)
+      })
+      $(".prev").text(writingContent.prev.title)
+      $(".prev").attr("href", writingContent.prev.href)
+      $(".next").text(writingContent.next.title)
+      $(".next").attr("href", writingContent.next.href)
+      $(".bread").append(`
+        <span>></span>
+        <span>
+        <a href="../news.html?category=${writingContent.categody}">${writingContent.categody}</a>
+        </span>
+        `)
+      $(".bread").append(`
+        <span>></span>
+        <span>
+        <a href="#">${writingContent.title}</a>
+        </span>
+        `)
+    })
+  </script>
+
+  <style>
+    main {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .essayItem > div {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .essayItem img {
+      margin-right: 25px;
+    }
+    .gategorySpan {
+      font-size: 15px;
+      color: #cc0000;
+      margin-right: 5px;
+    }
+
+    .titleSpan {
+      font-size: 15px;
+      color: #434343;
+      font-weight: bold;
+    }
+
+    .dateSpan {
+      display: block;
+      font-size: 12px;
+      color: #929292;
+      margin-top: 10px;
+    }
+    .essay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .essay .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #434343;
+    }
+
+    .property > span {
+      display: inline-block;
+      padding: 0px 20px 15px 20px;
+    }
+
+    .constract {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      padding: 5px 0;
+      color: #868686;
+      font-weight: normal;
+      line-height: 22px;
+      background-color: #f5f5f5;
+      border-radius: 1px solid #e5e5e5;
+    }
+
+    .writingContent p {
+      font-size: 14px;
+      color: #5a5a5a;
+      line-height: 30px;
+      letter-spacing: 2px;
+    }
+
+    .handle {
+      width: 100%;
+      justify-self: left;
+    }
+
+    .handle span {
+      font-size: 14px;
+      color: #595959;
+    }
+
+    .handle a {
+      font-size: 14px;
+      color: #cc0000;
+    }
+
+    .handle a:hover {
+      text-decoration: none;
+      color: #5a5a5a;
+    }
+    /* .pagination {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+    .thisPage {
+      color: #cc0000;
+    }
+
+    .otherPage {
+      display: inline-block;
+      width: 15px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    }
+    .otherPage > a {
+      width: 100%;
+      height: 100%;
+    }
+
+    .nextPage {
+      display: inline-block;
+      width: 50px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    }
+
+    .lastPage {
+      display: inline-block;
+      width: 30px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    } */
+  </style>
+</html>

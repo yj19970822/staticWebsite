@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/Normalize.css" />
+    <script src="../../css/bootstrap-4.6.1-dist/jquery-1.11.3.js"></script>
+    <script src="../../css/bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-4.6.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../css/news.css" />
+  </head>
+  <body>
+    <div class="headerLogo">
+      <img src="../../static/top-2.jpg" class="img-fluid" alt="..." />
+      <div class="discription media">
+        <img src="../../static/logo2.png" class="align-self-center mr-3" alt="..." />
+        <div class="media-body logoColor">
+          <h1 class="mt-0 logoColor"><strong>打造地方红色文化新高地</strong></h1>
+          <p class="fontSize21 logoColor"><strong>保护红色资源 · 传承红色文化 · 弘扬革命传统</strong></p>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <ul class="navi">
+        <li><a href="../index.html">网站首页</a></li>
+        <li><a href="../news.html">红色资讯</a></li>
+        <li><a href="../famers.html">红土骄子</a></li>
+        <li><a href="../gsyz.html">高山仰止</a></li>
+        <li class="activity"><a href="../hsll.html">红色理论</a></li>
+        <li><a href="../history.html">红色历史</a></li>
+        <li><a href="../culture.html">红色文化</a></li>
+        <li><a href="../register.html">登录/注册</a></li>
+      </ul>
+    </nav>
+    <main>
+      <div style="width: 1200px">
+        <div class="bread">
+          <span>当前位置：</span>
+          <span><a href="../index.html">网站首页</a></span>
+          <span>></span>
+          <span><a href="../hsll.html">红色理论</a></span>
+        </div>
+        <div class="content">
+          <div class="essay">
+            <p class="title"></p>
+            <div class="property">
+              <span>
+                <span>来源：</span>
+                <span class="author"></span>
+              </span>
+              <span>
+                <span>发布时间：</span>
+                <span class="release"></span>
+              </span>
+              <span>
+                <span class="viewCount"></span>
+                <span>次浏览</span>
+              </span>
+            </div>
+            <p class="constract"></p>
+            <div class="writingContent"></div>
+            <div class="handle">
+              <p>
+                <span>上一篇：</span>
+                <a href="" class="prev"></a>
+              </p>
+              <p>
+                <span>下一篇：</span>
+                <a href="" class="next"></a>
+              </p>
+            </div>
+          </div>
+          <div class="nav">
+            <a href=""><span class="firsSpan">红色历史</span></a>
+            <a href="#" onclick="removeItem('红色故事')"><span class="ortherSpan">红色故事</span></a>
+            <a href="#" onclick="removeItem('地方历史')"><span class="ortherSpan">地方历史</span></a>
+            <a href="#" onclick="removeItem('红色记忆')"><span class="ortherSpan">红色记忆</span></a>
+            <a href="#" onclick="removeItem('红色文物')"><span class="ortherSpan">红色文物</span></a>
+            <img
+              src="../../static/lxfs.jpg"
+              alt=""
+              style="display: block; width: 180px; height: 140px; margin-top: 10px"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">退出登录</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>是否退出？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" onclick="logout()">退出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <link rel="stylesheet" href="../../css/globla/header.css" />
+  <script>
+    const userInfo = JSON.parse(localStorage.getItem("login"))
+
+    if (userInfo.state) {
+      $(".navi li:last-child a").attr({
+        "data-toggle": "modal",
+        "data-target": "#exampleModal",
+      })
+      $(".navi li:last-child a").html(`欢迎&nbsp&nbsp${userInfo.username}`)
+    }
+
+    function logout() {
+      localStorage.setItem(
+        "login",
+        JSON.stringify({
+          state: false,
+          username: "",
+        })
+      )
+      $(".navi li:last-child a").removeAttr("data-toggle", "data-target")
+      location.href = "../index.html"
+    }
+    $(function () {
+      const lis = $(".navi > li")
+      const navi = $(".navi")
+      navi.mouseenter(function () {
+        lis.map((index, item) => {
+          $(item).removeClass("activity")
+        })
+      })
+      navi.mouseleave(function () {
+        $(lis[4]).addClass("activity")
+      })
+    })
+    const lis = $(".essay > ul > li")
+    function removeItem(descript) {
+      $(".essay > ul").empty()
+      lis.map((index, item) => {
+        if ($(item).attr("data-discrip") === descript) {
+          $(".essay > ul").append(item)
+        }
+      })
+      $(".bread span").length === 4
+        ? $(".bread").append(`
+      <span>></span>
+      <span>${descript}</span>
+      `)
+        : $($(".bread span")[5]).text(descript)
+      $(".bread span:nth-of-type(4) > a").attr("href", "./hsll.html")
+    }
+  </script>
+  <!-- 请求json文件获取文章详情 -->
+  <!-- <script src="../../hsllContent.json"></script> -->
+  <script>
+    const data = [
+      {
+        categody: "三农生态",
+        title: "李洪峰：党的十九大较重大的理论成就",
+        creater: "佚名",
+        createTime: "2017-11-02",
+        viewCount: "2108",
+        abstract:
+          "我们党是高举马克思主义伟大旗帜、理论上**成熟并且不断发展的伟大政党。党的全国代表大会作为党的较高领导机关，在推动党的事业发展和党的理论建设中具有极为重要的作用。",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "",
+          title: "",
+        },
+        next: {
+          href: "./index.html?id=1",
+          title: "张明仓：新时代中国共产党理论创新的基本经验",
+        },
+      },
+      {
+        categody: "三农生态",
+        title: "张明仓：新时代中国共产党理论创新的基本经验",
+        creater: "佚名",
+        createTime: "2017-11-02",
+        viewCount: "2371",
+        abstract:
+          "伟大的时代孕育伟大的理论，伟大的理论**伟大的时代。党的十九大报告指出，十八大以来，我们党围绕新的重大时代课题进行艰辛理论探索，取得重大理论创新成果，形成了新时代中国特色社会主义思想。",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=0",
+          title: "李洪峰：党的十九大较重大的理论成就",
+        },
+        next: {
+          href: "./index.html?id=2",
+          title: "刘志丹缘何坚持让大家称自己“老刘”",
+        },
+      },
+      {
+        categody: "文化教育",
+        title: "刘志丹缘何坚持让大家称自己“老刘”",
+        creater: "佚名",
+        createTime: "2017-11-02",
+        viewCount: "2218",
+        abstract:
+          "被毛泽东誉为“群众**，民族英雄”的刘志丹，是陕甘边革命根据地的主要创始人，历任陕甘边革命军事委员会主席、西北革命军事委员会主席、前敌总指挥等职。",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=1",
+          title: "张明仓：新时代中国共产党理论创新的基本经验",
+        },
+        next: {
+          href: "./index.html?id=3",
+          title: "向陈云学习调研工作的方法",
+        },
+      },
+      {
+        categody: "文化教育",
+        title: "向陈云学习调研工作的方法",
+        creater: "佚名",
+        createTime: "2017-11-02",
+        viewCount: "2315",
+        abstract:
+          "调查研究是做好领导工作的一项基本功，也是践行好党的群众路线的重要抓手。陈云是开展调查研究的典范，三年困难时期的1961年6月27日至7月11日，他积极响应毛泽东“大兴调查研究之风”的号召",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=2",
+          title: "刘志丹缘何坚持让大家称自己“老刘”",
+        },
+        next: {
+          href: "./index.html?id=4",
+          title: "倪明胜：夺取新时代中国特色社会主义伟大胜利",
+        },
+      },
+      {
+        categody: "三农生态",
+        title: "倪明胜：夺取新时代中国特色社会主义伟大胜利",
+        creater: "佚名",
+        createTime: "2017-08-26",
+        viewCount: "1739",
+        abstract:
+          "金秋十月，收获满满。举世瞩目的党的十九大在10月18日隆重开幕，习近平总书记代表十八届中央委员会向大会作报告，回顾总结过去五年工作取得的辉煌成就和宝贵经验，站在历史和时代的高度",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=3",
+          title: "向陈云学习调研工作的方法",
+        },
+        next: {
+          href: "./index.html?id=5",
+          title: "朱亮高：不断汲取中国共产党人的初心力量",
+        },
+      },
+      {
+        categody: "三农生态",
+        title: "朱亮高：不断汲取中国共产党人的初心力量",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1740",
+        abstract:
+          "党的十九大报告鲜明提出不忘初心、牢记使命，为中国人民谋幸福、为中华民族谋复兴的这个中国共产党人的初心和使命，是用以激励中国共产党人不断前进的根本动力。这个动力源自中国共产党的诞生，源自中国共产党人的不懈奋斗。",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=4",
+          title: "倪明胜：夺取新时代中国特色社会主义伟大胜利",
+        },
+        next: {
+          href: "./index.html?id=6",
+          title: "韩保江：新时代我国社会的主要矛盾及其现实意义",
+        },
+      },
+      {
+        categody: "三农生态",
+        title: "韩保江：新时代我国社会的主要矛盾及其现实意义",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "1527",
+        abstract:
+          "党的十九大报告中鲜明提出了“中国特色社会主义进入新时代，我国社会主要矛盾已经转化为人民日益增长的美好生活需要和不平衡不充分的发展之间的矛盾”的重大判断。这一重大判断，不仅为新时代的经济建设、",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=5",
+          title: "朱亮高：不断汲取中国共产党人的初心力量",
+        },
+        next: {
+          href: "./index.html?id=7",
+          title: "甄占民：“四新”彰显党的十九大思想灵魂和精髓要义",
+        },
+      },
+      {
+        categody: "三农生态",
+        title: "甄占民：“四新”彰显党的十九大思想灵魂和精髓要义",
+        creater: "佚名",
+        createTime: "2017-10-27",
+        viewCount: "2097",
+        abstract:
+          "党的十九大取得具有划时代意义的丰硕成果，其根本原因在于我们党深刻把握时代脉搏、实践要求和人民期待，在治国理政一系列重大理论和实践问题上实现重大突破，在系统谋划党和国家未来发展中昭示中华民族伟大复兴的光明前景",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=6",
+          title: "韩保江：新时代我国社会的主要矛盾及其现实意义",
+        },
+        next: {
+          href: "./index.html?id=8",
+          title: "用习近平新时代中国特色社会主义思想武装全党",
+        },
+      },
+      {
+        categody: "历史哲学",
+        title: "用习近平新时代中国特色社会主义思想武装全党",
+        creater: "佚名",
+        createTime: "2017-09-01",
+        viewCount: "1561",
+        abstract:
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=7",
+          title: "甄占民：“四新”彰显党的十九大思想灵魂和精髓要义",
+        },
+        next: {
+          href: "./index.html?id=9",
+          title: "东北局如何建立报告制度",
+        },
+      },
+      {
+        categody: "政治经济",
+        title: "东北局如何建立报告制度",
+        creater: "佚名",
+        createTime: "2017-09-01",
+        viewCount: "1693",
+        abstract:
+          "解放战争后期，党中央提出在全党建立报告制度，东北局刚开始这方面的工作较为被动，毛泽东以批评东北局为突破口，使得报告制度在全党落地生根，增强了各级党员干部的组织性和纪律性，对当前全面从严治党有借鉴作用。",
+        content: [
+          "习近平新时代中国特色社会主义思想是对党和人民实践经验和集体智慧的较新总结，是马克思主义中国化的较新成果，是党的指导思想的又一次与时俱进。认真深入学习领会习近平新时代中国特色社会主义思想，用党的创新理论武装全党、指导实践、推动工作，是全党的重大政治任务，是学习贯彻党的十九大精神、把党的十九大提出的历史使命和基本方略落到实处的重点。",
+          "习近平新时代中国特色社会主义思想体现共产党人理想信念和价值立场",
+          "革命理想高于天。共产党人必须有灵魂有思想有信念，必须有追求有奉献有担当。共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一、始终占领道义高地的思想基础。中国共产党的初心和使命，来自于唯物史观基本原理，来自于深刻的改造世界的长期实践。革命、建设、改革年代，无数仁人志士用自己的诉说、行动乃至生命践行着对于理想信念的不变承诺。",
+          "党的十八大以来，国内外形势变化和我国各项事业发展都给我们提出了一个重大时代课题，这就是必须从理论和实践结合上系统回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展中国特色社会主义。这个问题与改革开放之初的邓小平之问有联系，但体现了新时代强起来的特点，又是一个新的历史起点上全新的问题。回答好这个问题，必须坚持以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观为指导，坚持解放思想、实事求是、与时俱进、求真务实，坚持辩证唯物主义和历史唯物主义，紧密结合新的时代条件和实践要求，以全新的视野深化对共产党执政规律、社会主义建设规律、人类社会发展规律的认识。",
+        ],
+        prev: {
+          href: "./index.html?id=8",
+          title: "用习近平新时代中国特色社会主义思想武装全党",
+        },
+        next: {
+          href: "",
+          title: "",
+        },
+      },
+    ]
+  </script>
+  <script type="text/javascript">
+    $(function () {
+      const writingId = location.href.split("?")[1].split("=")[1]
+      if (!writingId) {
+        location.href = "../hsll.html.html"
+      }
+      const writingContent = data[writingId]
+      $(".title").text(writingContent.title)
+      $(".author").text(writingContent.creater)
+      $(".release").text(writingContent.createTime)
+      $(".viewCount").text(writingContent.viewCount)
+      $(".constract").text(writingContent.abstract)
+      $(".writingContent").empty()
+      writingContent.content.map((item, index) => {
+        $(".writingContent").append(`<p>${item}</p>`)
+      })
+      $(".prev").text(writingContent.prev.title)
+      $(".prev").attr("href", writingContent.prev.href)
+      $(".next").text(writingContent.next.title)
+      $(".next").attr("href", writingContent.next.href)
+      $(".bread").append(`
+        <span>></span>
+        <span>
+        <a href="../hsll.html?category=${writingContent.categody}">${writingContent.categody}</a>
+        </span>
+        `)
+      $(".bread").append(`
+        <span>></span>
+        <span>
+        <a href="#">${writingContent.title}</a>
+        </span>
+        `)
+    })
+  </script>
+
+  <style>
+    main {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .essayItem > div {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .essayItem img {
+      margin-right: 25px;
+    }
+    .gategorySpan {
+      font-size: 15px;
+      color: #cc0000;
+      margin-right: 5px;
+    }
+
+    .titleSpan {
+      font-size: 15px;
+      color: #434343;
+      font-weight: bold;
+    }
+
+    .dateSpan {
+      display: block;
+      font-size: 12px;
+      color: #929292;
+      margin-top: 10px;
+    }
+    .essay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .essay .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #434343;
+    }
+
+    .property > span {
+      display: inline-block;
+      padding: 0px 20px 15px 20px;
+    }
+
+    .constract {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      padding: 5px 0;
+      color: #868686;
+      font-weight: normal;
+      line-height: 22px;
+      background-color: #f5f5f5;
+      border-radius: 1px solid #e5e5e5;
+    }
+
+    .writingContent p {
+      font-size: 14px;
+      color: #5a5a5a;
+      line-height: 30px;
+      letter-spacing: 2px;
+    }
+
+    .handle {
+      width: 100%;
+      justify-self: left;
+    }
+
+    .handle span {
+      font-size: 14px;
+      color: #595959;
+    }
+
+    .handle a {
+      font-size: 14px;
+      color: #cc0000;
+    }
+
+    .handle a:hover {
+      text-decoration: none;
+      color: #5a5a5a;
+    }
+    /* .pagination {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+    .thisPage {
+      color: #cc0000;
+    }
+
+    .otherPage {
+      display: inline-block;
+      width: 15px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    }
+    .otherPage > a {
+      width: 100%;
+      height: 100%;
+    }
+
+    .nextPage {
+      display: inline-block;
+      width: 50px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    }
+
+    .lastPage {
+      display: inline-block;
+      width: 30px;
+      height: 20px;
+      border: 1px solid #5a5a5a;
+      text-align: center;
+    } */
+  </style>
+</html>
