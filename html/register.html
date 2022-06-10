@@ -7,10 +7,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/Normalize.css" />
     <link rel="stylesheet" href="../css/globla/header.css" />
-    <script src="../css/bootstrap-4.6.1-dist/jquery-1.11.3.js"></script>
-    <script src="../css/bootstrap-4.6.1-dist/js/bootstrap.bundle.js"></script>
-    <link rel="stylesheet" href="../css/bootstrap-4.6.1-dist/css/bootstrap.css" />
     <link rel="stylesheet" href="../css/news.css" />
+    <link rel="stylesheet" href="../css/bootstrap-4.6.1-dist/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/bootstrap-4.6.1-dist/dist/css/bootstrapValidator.css" />
+
+    <script src="../css/bootstrap-4.6.1-dist/vendor/jquery/jquery-1.10.2.min.js"></script>
+    <script src="../css/bootstrap-4.6.1-dist/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../css/bootstrap-4.6.1-dist/dist/js/bootstrapValidator.js"></script>
   </head>
   <body>
     <div class="headerLogo">
@@ -45,52 +48,207 @@
         </div>
         <div class="content">
           <div class="essay" style="margin: 0">
-            <div class="handle">
-              <a href="./register.html?category=登录" class="select">登录</a>
-              <span></span>
-              <a href="./register.html?category=注册">注册</a>
-            </div>
-            <div class="loginForm">
-              <div class="loginItem">
-                <label for="username">用户账号</label>
-                <input type="text" name="loginUsername" placeholder="请输入用户账号" />
+            <section class="feedbackForm">
+              <div class="col-lg-10 col-lg-offset-2 center">
+                <div class="page-header">
+                  <h2>用户反馈</h2>
+                  <p style="padding-right: 150px">
+                    感谢您使用本网站，您对本网站有任何意见和建议，或在使用过程中遇到问题，都可以在本页进行反馈，我们会认真阅读您的反馈，不断优化产品，为您提供更好的服务！
+                  </p>
+                </div>
+                <form id="feedbackForm" method="post" class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">1.您常用的账户名是？</label>
+                    <div class="col-lg-5">
+                      <input type="text" class="form-control" name="username" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">2.您常用的电话号码是？</label>
+                    <div class="col-lg-5">
+                      <input type="text" class="form-control" name="phoneNumber" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">您对当目前这个网站的整体满意度如何？</label>
+                    <div class="col-lg-5">
+                      <div class="radio">
+                        <label> <input type="radio" name="satisfaction" value="good" /> 满意 </label>
+                      </div>
+                      <div class="radio">
+                        <label> <input type="radio" name="satisfaction" value="general" /> 一般 </label>
+                      </div>
+                      <div class="radio">
+                        <label> <input type="radio" name="satisfaction" value="bad" /> 不满意 </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">您访问页面速度的情况是？</label>
+                    <div class="col-lg-5">
+                      <div class="radio">
+                        <label> <input type="radio" name="speed" value="fast" /> 很快 </label>
+                      </div>
+                      <div class="radio">
+                        <label> <input type="radio" name="speed" value="normal" /> 一般 </label>
+                      </div>
+                      <div class="radio">
+                        <label> <input type="radio" name="speed" value="low" /> 较慢 </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">您从哪里知道这个网站？</label>
+                    <div class="col-lg-5">
+                      <div class="checkbox">
+                        <label> <input type="checkbox" name="languages[]" value="recommend" /> 朋友推荐 </label>
+                      </div>
+                      <div class="checkbox">
+                        <label> <input type="checkbox" name="languages[]" value="leaflet" /> 线下传单 </label>
+                      </div>
+                      <div class="checkbox">
+                        <label> <input type="checkbox" name="languages[]" value="advertising" /> 线上广告 </label>
+                      </div>
+                      <div class="checkbox">
+                        <label style="font-weight: normal">
+                          <input type="checkbox" name="languages[]" value="other" /> 其它渠道
+                        </label>
+                        <input type="text" class="form-control" name="other" placeholder="请输入其它渠道" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-3">
+                      <button type="submit" class="btn btn-primary" name="signup" value="Sign up">提交</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="loginItem">
-                <label for="password">用户密码</label>
-                <input type="text" name="loginPassword" placeholder="请输入账户密码" />
+            </section>
+            <section class="loginForm">
+              <div class="col-lg-8 col-lg-offset-2 center">
+                <form id="loginForm" method="post" class="form-horizontal">
+                  <div class="alert alert-success" style="display: none"></div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">用户账号</label>
+                    <div class="col-lg-5">
+                      <input type="text" class="form-control" name="loginuserAccount" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">用户密码</label>
+                    <div class="col-lg-5">
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="loginpassword"
+                        data-bv-identical="true"
+                        data-bv-different="true"
+                        data-bv-different-field="registerUsername"
+                        data-bv-different-message="用户密码不能与用户名称一致"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-5 col-lg-offset-4">
+                      <button type="submit" class="btn">登录</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="registerItem">
-                <button onclick="login()">登录</button>
+            </section>
+            <section class="registerForm">
+              <div class="col-lg-8 col-lg-offset-2 center">
+                <form id="registerForm" method="post" class="form-horizontal">
+                  <div class="alert alert-success" style="display: none"></div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">用户名称</label>
+                    <div class="col-lg-5">
+                      <input type="text" class="form-control" name="registerUsername" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">用户账号</label>
+                    <div class="col-lg-5">
+                      <input type="text" class="form-control" name="userAccount" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">用户邮箱</label>
+                    <div class="col-lg-5">
+                      <input type="text" class="form-control" name="userEmail" />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">用户密码</label>
+                    <div class="col-lg-5">
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="registerpassword"
+                        required
+                        data-bv-notempty-message="用户密码不能为空"
+                        data-bv-identical="true"
+                        data-bv-identical-field="confirmPassword"
+                        data-bv-identical-message="两次输入密码不一致"
+                        data-bv-different="true"
+                        data-bv-different-field="registerUsername"
+                        data-bv-different-message="用户密码不能与用户名称一致"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">重复密码</label>
+                    <div class="col-lg-5">
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="confirmPassword"
+                        required
+                        data-bv-notempty-message="重复输入密码不能为空"
+                        data-bv-identical="true"
+                        data-bv-identical-field="registerpassword"
+                        data-bv-identical-message="两次输入密码不一致"
+                        data-bv-different="true"
+                        data-bv-different-field="registerUsername"
+                        data-bv-different-message="用户密码不能与用户名称一致"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-5 col-lg-offset-4">
+                      <button type="submit" class="btn">注册</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </div>
-            <div class="registerForm">
-              <div class="registerItem">
-                <label for="username">用户名称</label>
-                <input type="text" name="registerUsername" placeholder="请输入用户名称" required />
-              </div>
-              <div class="registerItem">
-                <label for="userAccount">用户账号</label>
-                <input type="text" name="userAccount" placeholder="请输入用户账号" required />
-              </div>
-              <div class="registerItem">
-                <label for="password">用户密码</label>
-                <input type="text" name="registerpassword" placeholder="请输入用户密码" required />
-              </div>
-              <div class="registerItem">
-                <label for="userEmail">用户邮箱</label>
-                <input type="text" name="userEmail" placeholder="请输入用户邮箱" required />
-              </div>
-              <div class="registerItem">
-                <button onclick="register()">注册</button>
-              </div>
-            </div>
+            </section>
+          </div>
+          <div class="nav">
+            <a href="./news.html"><span class="firsSpan">登录/注册</span></a>
+            <a href="./register.html?category=登录"><span class="ortherSpan">用户登录</span></a>
+            <a href="./register.html?category=注册"><span class="ortherSpan">用户注册</span></a>
+            <a href="./register.html?category=反馈"><span class="ortherSpan">意见反馈</span></a>
+            <img src="../static/lxfs.jpg" alt="" />
           </div>
         </div>
       </div>
     </main>
   </body>
   <script>
-    console.log(JSON.parse(localStorage.getItem("userAccounts")))
     const lis = $(".essay > ul > li")
     function removeItem(descript) {
       $(".essay > ul").empty()
@@ -119,95 +277,45 @@
     if (heafArray.length > 1) {
       const category = decodeURI(heafArray[1].split("=")[1])
       removeItem(category)
-      if (category === "登录") {
-        $(".registerForm").hide()
-        removeStyle(alsit)
-        $(alsit[0]).addClass("select")
-      } else {
-        $(".loginForm").hide()
-        removeStyle(alsit)
-        $(alsit[1]).addClass("select")
+      switch (category) {
+        case "登录":
+          $(".registerForm").hide()
+          $(".feedbackForm").hide()
+          break
+        case "注册":
+          $(".loginForm").hide()
+          $(".feedbackForm").hide()
+          break
+        case "反馈":
+          $(".loginForm").hide()
+          $(".registerForm").hide()
+          break
       }
-      // category === "登录" ? $(".registerForm").hide() : $(".loginForm").hide()
     } else {
       removeItem("登录")
       $(".registerForm").hide()
+      $(".feedbackForm").hide()
     }
 
     function register() {
-      const inputItems = $(".registerForm input")
-      const res = inputItems.map((index, item) => {
-        // if (!item.validity.valid) {
-        //   const response = $(item).attr("placeholder")
-        //   console.log(response)
-        //   item.setCustomValidity(response)
-        // }
-        if ($(item).val() === "") {
-          alert($(item).attr("placeholder"))
-          return false
+      if (localStorage.getItem("userAccounts")) {
+        let obj = localStorage.getItem("userAccounts")
+        obj[$("input[name='userAccount']")] = {
+          usernmae: $("input[name='registerUsername']").val(),
+          account: $("input[name='userAccount']").val(),
+          password: $("input[name='registerpassword']").val(),
+          email: $("input[name='userEmail']").val(),
         }
-      })
-      if (res.length === 0) {
-        alert("注册成功")
-        if (localStorage.getItem("userAccounts")) {
-          let obj = localStorage.getItem("userAccounts")
-          obj[$("input[name='userAccount']")] = {
-            usernmae: $("input[name='registerUsername']").val(),
-            account: $("input[name='userAccount']").val(),
-            password: $("input[name='registerpassword']").val(),
-            email: $("input[name='userEmail']").val(),
-          }
-          localStorage.setItem("userAccounts", JSON.stringify(obj))
-        } else {
-          let obj = {}
-          obj[$("input[name='userAccount']").val()] = {
-            usernmae: $("input[name='registerUsername']").val(),
-            account: $("input[name='userAccount']").val(),
-            password: $("input[name='registerpassword']").val(),
-            email: $("input[name='userEmail']").val(),
-          }
-          localStorage.setItem("userAccounts", JSON.stringify(obj))
+        localStorage.setItem("userAccounts", JSON.stringify(obj))
+      } else {
+        let obj = {}
+        obj[$("input[name='userAccount']").val()] = {
+          usernmae: $("input[name='registerUsername']").val(),
+          account: $("input[name='userAccount']").val(),
+          password: $("input[name='registerpassword']").val(),
+          email: $("input[name='userEmail']").val(),
         }
-      }
-    }
-
-    const userList = JSON.parse(localStorage.getItem("userAccounts"))
-    function login() {
-      const inputItems = $(".loginForm input")
-      const res = inputItems.map((index, item) => {
-        // if (!item.validity.valid) {
-        //   const response = $(item).attr("placeholder")
-        //   console.log(response)
-        //   item.setCustomValidity(response)
-        // }
-        if ($(item).val() === "") {
-          alert($(item).attr("placeholder"))
-          return false
-        }
-      })
-      console.log(userList)
-      if (res.length === 0) {
-        if (userList === null) {
-          alert("账户不存在")
-          return false
-        }
-        if (!userList[$("input[name='loginUsername']").val()]) {
-          alert("账户不存在")
-        } else {
-          if ($("input[name='loginPassword'").val() === userList[$("input[name='loginUsername']").val()].password) {
-            alert("登录成功")
-            localStorage.setItem(
-              "login",
-              JSON.stringify({
-                state: true,
-                username: $("input[name='loginUsername']").val(),
-              })
-            )
-            location.href = "./index.html"
-          } else {
-            alert("密码不正确")
-          }
-        }
+        localStorage.setItem("userAccounts", JSON.stringify(obj))
       }
     }
 
@@ -222,6 +330,253 @@
       navi.mouseleave(function () {
         $(lis[7]).addClass("activity")
       })
+    })
+  </script>
+  <!-- 表单验证脚本 -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#registerForm")
+        .bootstrapValidator({
+          message: "This value is not valid",
+          //live: 'submitted',
+          feedbackIcons: {
+            valid: "glyphicon glyphicon-ok",
+            invalid: "glyphicon glyphicon-remove",
+            validating: "glyphicon glyphicon-refresh",
+          },
+          fields: {
+            registerUsername: {
+              message: "The username is not valid",
+              validators: {
+                notEmpty: {
+                  message: "用户名称不能为空",
+                },
+                stringLength: {
+                  min: 4,
+                  max: 30,
+                  message: "用户名称必需大于4个字符小于30个字符",
+                },
+                /*remote: {
+                          url: 'remote.php',
+                          message: 'The username is not available'
+                      },*/
+                // regexp: {
+                //   regexp: /^[a-zA-Z0-9_\.]+$/,
+                //   message: "The username can only consist of alphabetical, number, dot and underscore",
+                // },
+              },
+            },
+            userAccount: {
+              message: "The username is not valid",
+              validators: {
+                notEmpty: {
+                  message: "用户账户不能为空",
+                },
+                stringLength: {
+                  min: 4,
+                  max: 30,
+                  message: "用户账户长度必需大于4个字符且小于30个字符",
+                },
+                /*remote: {
+                          url: 'remote.php',
+                          message: 'The username is not available'
+                      },*/
+                // regexp: {
+                //   regexp: /^[a-zA-Z0-9_\.]+$/,
+                //   message: "The username can only consist of alphabetical, number, dot and underscore",
+                // },
+              },
+            },
+            userEmail: {
+              validators: {
+                notEmpty: {
+                  message: "用户邮箱不能为空",
+                },
+                emailAddress: {
+                  message: "请输入正确的邮箱格式",
+                },
+              },
+            },
+            //   password: {
+            //     validators: {
+            //       notEmpty: {
+            //         message: "The password is required and can't be empty",
+            //       },
+            //     },
+            //   },
+          },
+        })
+        .on("success.form.bv", function (e) {
+          // Prevent submit form
+          register()
+          e.preventDefault()
+          var $form = $(e.target),
+            validator = $form.data("bootstrapValidator")
+          $form
+            .find(".alert")
+            .html(
+              "注册成功，现在您可以用过账户" +
+                validator.getFieldElements("userAccount").val() +
+                "登录,三秒后跳转到登录页"
+            )
+            .show()
+          setInterval(() => {
+            location.href = "./register.html?category=登录"
+          })
+        })
+      $("#loginForm")
+        .bootstrapValidator({
+          message: "This value is not valid",
+          //live: 'submitted',
+          feedbackIcons: {
+            valid: "glyphicon glyphicon-ok",
+            invalid: "glyphicon glyphicon-remove",
+            validating: "glyphicon glyphicon-refresh",
+          },
+          fields: {
+            loginuserAccount: {
+              message: "The username is not valid",
+              validators: {
+                stringLength: {
+                  min: 4,
+                  max: 30,
+                  message: "用户账户长度必需大于4个字符且小于30个字符",
+                },
+                callback: {
+                  callback: function (value, validator, $field) {
+                    if (value !== "") {
+                      if (
+                        localStorage.getItem("userAccounts") === null ||
+                        JSON.parse(localStorage.getItem("userAccounts"))[value] === undefined
+                      ) {
+                        return { valid: false, message: "该账户不存在" }
+                      } else return { valid: true }
+                    } else return { valid: false, message: "用户账户不能为空" }
+                  },
+                },
+              },
+            },
+            loginpassword: {
+              message: "The password is not valid",
+              validators: {
+                callback: {
+                  callback: function (value, validator, $field) {
+                    const userAccount = $("input[name='loginuserAccount']").val()
+                    if (value !== "") {
+                      if (
+                        localStorage.getItem("userAccounts") !== null &&
+                        JSON.parse(localStorage.getItem("userAccounts"))[userAccount] !== undefined &&
+                        JSON.parse(localStorage.getItem("userAccounts"))[userAccount].password === value
+                      ) {
+                        return { valid: true }
+                      } else {
+                        return {
+                          valid: false,
+                          message: "密码错误",
+                        }
+                      }
+                    } else return { valid: false, message: "密码不能为空" }
+                  },
+                },
+              },
+            },
+          },
+        })
+        .on("success.form.bv", function (e) {
+          // Prevent submit form
+          e.preventDefault()
+          var $form = $(e.target),
+            validator = $form.data("bootstrapValidator")
+          $form
+            .find(".alert")
+            .html(validator.getFieldElements("loginuserAccount").val() + "登录成功，两秒后自动跳转到网站首页")
+            .show()
+          const userInfo = JSON.parse(localStorage.getItem("userAccounts"))
+          const username = userInfo[$("input[name='loginuserAccount']").val()].usernmae
+          localStorage.setItem(
+            "login",
+            JSON.stringify({
+              state: true,
+              username: username,
+            })
+          )
+          setInterval(() => {
+            location.href = "./index.html"
+          }, 2000)
+        })
+    })
+  </script>
+
+  <!-- 反馈表单验证脚本 -->
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#feedbackForm")
+        .bootstrapValidator({
+          message: "This value is not valid",
+          feedbackIcons: {
+            valid: "glyphicon glyphicon-ok",
+            invalid: "glyphicon glyphicon-remove",
+            validating: "glyphicon glyphicon-refresh",
+          },
+          fields: {
+            username: {
+              message: "The username is not valid",
+              validators: {
+                notEmpty: {
+                  message: "请输入您常用的用户名称",
+                },
+                stringLength: {
+                  min: 4,
+                  max: 30,
+                  message: "用户名称不少与4个字符串并且少于30个字符串",
+                },
+              },
+            },
+            phoneNumber: {
+              validators: {
+                notEmpty: {
+                  message: "请输入您常用的电话号码",
+                },
+                digits: {
+                  message: "请输入正确的电话号码",
+                },
+                phone: {
+                  country: "CN",
+                  message: "请输入正确的电话号码",
+                },
+              },
+            },
+            satisfaction: {
+              validators: {
+                notEmpty: {
+                  message: "请选择您对本网站的满意度评价",
+                },
+              },
+            },
+            speed: {
+              validators: {
+                notEmpty: {
+                  message: "请选择您对本网站浏览速度的评价",
+                },
+              },
+            },
+            "languages[]": {
+              validators: {
+                notEmpty: {
+                  message: "请选择您认识本网站的渠道",
+                },
+              },
+            },
+          },
+        })
+        .on("success.form.bv", function (e) {
+          // Prevent submit form
+          e.preventDefault()
+          var $form = $(e.target),
+            validator = $form.data("bootstrapValidator")
+          $form.find(".alert").html("提交成功，感谢您的反馈").show()
+        })
     })
   </script>
   <style>
@@ -273,7 +628,48 @@
       padding: 15px 0;
     }
 
-    label {
+    .essay {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .essay section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .essay section button {
+      width: 130px;
+      background-color: #cc0000;
+      color: #ffe599;
+      border: none;
+      outline: none;
+    }
+
+    .essay section button:hover {
+      color: #ffe599;
+    }
+
+    .essay section button:active {
+      border: none;
+      outline: none;
+      background-color: #cc0000;
+      color: #ffe599;
+    }
+
+    .feedbackForm .form-group > label {
+      font-size: 10px;
+    }
+
+    /* .feedbackForm .form-group {
+      display: flex;
+      flex-direction: column;
+    } */
+    /* label {
       padding: 0 5px;
       font-size: 16px;
       color: #5a5a5a;
@@ -300,6 +696,6 @@
       border: none;
       border-radius: 40px;
       background-color: #cc0000;
-    }
+    } */
   </style>
 </html>
